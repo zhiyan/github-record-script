@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 import sys,os,time,subprocess,random
 
-file_name = 'bug.md'
+file_name = 'log.log'
 file_path = '/root/www/github-record-script/'
+file_log_path = file_path + 'log'
 
 def check_file():
-	if not os.path.exists(file_path + file_name):
+	if not os.path.exists(file_log_path + file_name):
 		f = open(file_path + file_name,'w')
 		f.write(str(time.time()) + '\n')
 		f.close()
 
 def add_file_line():
-	f = open(file_path + file_name,'a+')
+	f = open(file_log_path + file_name,'a+')
 	f.write(str(time.time()) + '\n')
 	f.close()
 
@@ -30,18 +31,6 @@ def git_push():
 	cmd = ['git', 'push', '-u','origin','master']
 	p = subprocess.Popen(cmd,cwd=file_path)
 	print p.wait()
-
-def cmd_list():
-	cmd_list = []
-	cmd_list.append("git add .")
-	cmd_list.append("git commit -m 'upload bug info - " + str(time.time()) + "'")
-	cmd_list.append("git push -u origin master")
-	return cmd_list
-	
-def cmd_go():
-	cmd_str_list = cmd_list()
-	for cmd_go in cmd_str_list:
-		subprocess.call(cmd_go,shell=True)
 		
 def file_handle():
 	check_file()
