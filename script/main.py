@@ -3,7 +3,7 @@ import sys,os,time,subprocess,random
 
 file_name = 'log.log'
 file_path = '/root/www/github-record-script/'
-file_log_path = file_path + 'log'
+file_log_path = file_path + 'log/'
 
 def check_file():
 	if not os.path.exists(file_log_path + file_name):
